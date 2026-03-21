@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS RADAR — Global Tracking Command</title>
+
+  <!-- Fonts & Leaflet CSS — loaded first so layout paint is instant -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google AdSense — replace XXXXXXXXXXXXXXXX with your Publisher ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!--
+    PERFORMANCE NOTES vs original single-file version:
+    ✅ Babel removed  — JSX is now pre-compiled to React.createElement() calls.
+                        This was the #1 cause of the freeze: Babel was parsing
+                        ~1 600 lines of JSX in the browser on every page load.
+    ✅ Data counts cut — Ships 2 500→400, Vehicles 2 500→500, Swarm sats 1 500→300.
+                        You can raise these safely later once the site is snappy.
+    ✅ Sidebar lists   — Capped at 400–500 DOM nodes (was 1 000) for faster render.
+    ✅ Ticker arrays   — Sliced to 40 duplicated items (was 60) to trim DOM.
+    ✅ Separate files  — Netlify can cache data.js / styles.css independently.
+  -->
+
+  <!-- React & ReactDOM (production build, no dev overhead) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Leaflet -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- App scripts (order matters: data first, then app logic) -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
